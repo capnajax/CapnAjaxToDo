@@ -1,0 +1,14 @@
+{
+	"global": {},
+	"env:development": {},
+	"env:test": {},
+	"env:production": {},
+	"os:android": {},
+	"os:ios": {},
+	"os:mobileweb": {},
+	"os:windows": {},
+	"adapters": ["sql"],
+	"dependencies": {
+        "com.capnajax.navigation": "1.0"
+	}
+}

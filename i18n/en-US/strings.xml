@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<string name="list_pending">Pending Items</string>
+	<string name="list_complete">Completed Items</string>
+
+	<string name="item_updateImage">Update Image</string>
+	<string name="item-last-modified">Last Modified:</string>
+	<string name="item_pending">Pending Item</string>
+	<string name="item_complete">Completed Item</string>
+</resources>

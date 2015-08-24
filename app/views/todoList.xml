@@ -1,0 +1,31 @@
+<Alloy>
+	<View class="container">
+		<!-- requires 4.1.1 due to defect in 4.1: https://jira.appcelerator.org/browse/TIMOB-19209 -->
+		<ListView id="todoListListView">
+			<Templates>
+				<ItemTemplate name="todoItem">
+					<View class="itemView">
+						<Label class="todoStatus" bindId="completed" />
+						<ImageView class="todoImage" bindId="image" />
+						<Label class="todoContent" bindId="content" />
+					</View>
+				</ItemTemplate>
+			</Templates>
+			<ListSection id="pendingTodos" class="todoListSection">
+				<HeaderView id="pendingHeader">
+					<View id="pendingHeaderView" class="headerViewView">
+						<Label id="pendingHeaderLabel" class="headerLabel" textid="list_pending" />
+						<Button id="newTodo" class="newTodoButton" />
+					</View>
+				</HeaderView>
+			</ListSection>
+			<ListSection id="completedTodos" class="todoListSection">
+				<HeaderView id="completedHeader">
+					<View id="completedHeaderView" class="headerViewView">
+						<Label id="completedHeaderLabel" class="headerLabel" textid="list_complete" />
+					</View>
+				</HeaderView>
+			</ListSection>
+		</ListView>
+	</View>
+</Alloy>

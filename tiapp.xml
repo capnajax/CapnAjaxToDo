@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <id>com.capnajax.todo</id>
+    <name>CapnAjaxToDo</name>
+    <version>1.0</version>
+    <publisher>thomas</publisher>
+    <url>http://capnajax.com</url>
+    <description>undefined</description>
+    <copyright>2015 by thomas</copyright>
+    <icon>appicon.png</icon>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>278e17ec-888d-45e5-9999-2cbc8d0b5e16</guid>
+    <property name="ti.ui.defaultunit" type="string">dp</property>
+    <ios>
+        <plist>
+            <dict>
+                <key>UISupportedInterfaceOrientations~iphone</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                </array>
+                <key>UIRequiresPersistentWiFi</key>
+                <false/>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+                <key>UIStatusBarHidden</key>
+                <false/>
+                <key>UIStatusBarStyle</key>
+                <string>UIStatusBarStyleDefault</string>
+            </dict>
+        </plist>
+    </ios>
+    <android xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <mobileweb>
+        <precache/>
+        <splash>
+            <enabled>true</enabled>
+            <inline-css-images>true</inline-css-images>
+        </splash>
+        <theme>default</theme>
+    </mobileweb>
+    <modules>
+        <module platform="commonjs">ti.cloud</module>
+    </modules>
+    <deployment-targets>
+        <target device="android">true</target>
+        <target device="ipad">false</target>
+        <target device="iphone">true</target>
+        <target device="mobileweb">false</target>
+        <target device="windows">false</target>
+    </deployment-targets>
+    <sdk-version>4.1.1.v20150816214206</sdk-version>
+    <plugins>
+        <plugin version="1.0">ti.alloy</plugin>
+    </plugins>
+    <property name="appc-app-id" type="string">55d761b80f5c28304249a4cb</property>
+    <property name="acs-authbase-url-development" type="string">https://secure-identity.cloud.appcelerator.com</property>
+    <property name="acs-base-url-development" type="string">https://api.cloud.appcelerator.com</property>
+    <property name="acs-oauth-secret-development" type="string">gVIz1I0IgLghrcB3qtzZZ0i77RPwb6Zs</property>
+    <property name="acs-oauth-key-development" type="string">UKkgxLu6K7OADzI0G8UWREalEBNfnzeY</property>
+    <property name="acs-api-key-development" type="string">a3l6Xg16qMmuZS2W0SnQxYA3nehtD3PW</property>
+    <property name="acs-username-development" type="string">appc_app_user_dev</property>
+    <property name="acs-password-development" type="string">YeXQBSUe4pUsSZyb1y</property>
+    <property name="acs-authbase-url-production" type="string">https://secure-identity.cloud.appcelerator.com</property>
+    <property name="acs-base-url-production" type="string">https://api.cloud.appcelerator.com</property>
+    <property name="acs-oauth-secret-production" type="string">JPOv1Lql8pG1nYSX8GeUaJU6q2hNoi0z</property>
+    <property name="acs-oauth-key-production" type="string">1OcDswP5SKc5tsEpM9peV6gLIIzWob3H</property>
+    <property name="acs-api-key-production" type="string">u9OXUatc6UrW9Hj6UwytsJYl9DlvaceS</property>
+    <property name="acs-username-production" type="string">appc_app_user</property>
+    <property name="acs-password-production" type="string">dupfFpKmpy6uIdZw1p</property>
+    <property name="appc-org-id" type="string">100055155</property>
+    <property name="appc-creator-user-id" type="string">e2f84107-1a54-4bef-8c4b-b8a13b758b9b</property>
+</ti:app>

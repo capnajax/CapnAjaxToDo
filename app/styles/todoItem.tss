@@ -1,0 +1,77 @@
+
+".container" : {
+	backgroundColor:"white"
+},
+"#statusContainer": {
+	top: 0,
+	left: 10,
+	right: 10,
+	height: 50
+}
+".statusIcon": {
+	top: 0,
+	left: 0,
+	width: 30,
+	height: 40
+},
+".statusIcon[platform=ios]": {
+	font: {
+		fontFamily:"FontAwesome"
+	}
+},
+".statusLabel": {
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT,
+	left: 30,
+	right: 0,
+	font: {
+		fontSize: 24,
+		fontFamily: "Helvetica,sans-serif"
+	},
+	color: "#193380"
+}
+".contentArea": {
+	top: 40,
+	left: 10,
+	right: 10,
+	bottom: 345
+}
+
+".imageContainer": {
+	height: 300,
+	bottom: 25
+}
+".updateImage": {
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	color: "white",
+	bottom: 10
+}
+".image": {
+	bottom: 10,
+	height: 300,
+	width: 300,
+	backgroundColor: "#159dbe"
+}
+".lastModContainer": {
+	layout: "horizontal",
+	height: 15,
+	bottom: 10,
+	left: 10,
+	right: 10
+}
+".lastModLabel": {
+	color: "#938d91",
+	width: Ti.UI.SIZE,
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
+	right: 5,
+	font: {
+		fontSize: 10
+	}
+}
+
+".lastModDt": {
+	color: "#938d91",
+	width: Ti.UI.SIZE,
+	font: {
+		fontSize: 10
+	}
+}

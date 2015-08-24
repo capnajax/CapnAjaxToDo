@@ -1,0 +1,20 @@
+<Alloy>
+	<Collection src="todo"/>
+	<View class="container" dataCollection="todo" dataFunction="updateUi" dataFilter="instanceViewFilter" dataTransform="doTransform">
+		<View>
+			<View id="statusContainer">
+				<Label class="statusIcon" text="{statusIcon}" onClick="toggleStatus"/>
+				<Label class="statusLabel" textid="{statusLabel}" />
+			</View>
+			<TextArea class="contentArea" value="{content}" onChange="updateContent" />
+			<View class="imageContainer">
+				<ImageView class="image" src="{image}" />
+				<Label class="updateImage" textid="item_updateImage" />
+			</View>
+			<View class="lastModContainer">
+				<Label class="lastModLabel" textid="item-last-modified"/>
+				<Label class="lastModDt" text="{readabledate}" />
+			</View>
+		</View>
+	</View>
+</Alloy>
