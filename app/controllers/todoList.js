@@ -15,7 +15,8 @@ function transform(collection) {
 			template: "todoItem",
 			properties: {
 				itemId: model.id,
-				height: 50
+				height: 50,
+				searchableText: model.content
 			},
 			completed: {
 				text: model.completed ? icons.completed : icons.pending,

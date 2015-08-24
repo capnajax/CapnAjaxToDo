@@ -2,6 +2,7 @@
 	<View class="container">
 		<!-- requires 4.1.1 due to defect in 4.1: https://jira.appcelerator.org/browse/TIMOB-19209 -->
 		<ListView id="todoListListView">
+		    <SearchBar id="search" showCancel="true" />
 			<Templates>
 				<ItemTemplate name="todoItem">
 					<View class="itemView">

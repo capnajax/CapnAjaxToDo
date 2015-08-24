@@ -15,7 +15,8 @@ function Controller() {
                 template: "todoItem",
                 properties: {
                     itemId: model.id,
-                    height: 50
+                    height: 50,
+                    searchableText: model.content
                 },
                 completed: {
                     text: model.completed ? icons.completed : icons.pending,
@@ -57,6 +58,10 @@ function Controller() {
         id: "todoList"
     });
     $.__views.todoList && $.addTopLevelView($.__views.todoList);
+    $.__views.search = Ti.UI.createSearchBar({
+        id: "search",
+        showCancel: "true"
+    });
     var __alloyId25 = {};
     var __alloyId28 = [];
     var __alloyId30 = {
@@ -182,6 +187,7 @@ function Controller() {
         backgroundColor: "white",
         sections: __alloyId39,
         templates: __alloyId25,
+        searchView: $.__views.search,
         id: "todoListListView"
     });
     $.__views.todoList.add($.__views.todoListListView);
