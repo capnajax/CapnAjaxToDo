@@ -28,8 +28,21 @@ function transform(collection) {
 	return result;
 }
 
-function toggleStatus(evt) {
-};
+function newTodo(evt) {
+	var newModel = Alloy.createModel("todo");
+	Ti.API.debug("newModel1: "+JSON.stringify(newModel));
+	newModel.save();
+	Alloy.Collections.todo.fetch();
+	Ti.API.debug("newModel2: "+JSON.stringify(newModel));
+	openDetail(newModel.id);
+}
+
+function openDetail(id) {
+	var editItemScreen = Alloy.createController('todoItem', {itemId:id});
+	editItemScreen.getView().addEventListener('close', refreshData);
+	Alloy.Globals.navigation.advance(editItemScreen.getView());
+}
+
 
 var db=Ti.Database.open("_alloy_");
 db.execute("INSERT INTO todo (completed, content) VALUES (0, 'test content');");
@@ -60,9 +73,7 @@ function refreshData() {
 			setTimeout(refreshData, 500);
 		} else {
 			Ti.API.debug("itemClick on id " + evt.itemId);
-			var editItemScreen = Alloy.createController('todoItem', {itemId:evt.itemId});
-			editItemScreen.getView().addEventListener('close', refreshData);
-			Alloy.Globals.navigation.advance(editItemScreen.getView());
+			openDetail(evt.itemId);
 		}
 	});
 	

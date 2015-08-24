@@ -16,7 +16,7 @@
 				<HeaderView id="pendingHeader">
 					<View id="pendingHeaderView" class="headerViewView">
 						<Label id="pendingHeaderLabel" class="headerLabel" textid="list_pending" />
-						<Button id="newTodo" class="newTodoButton" />
+						<Button id="newTodo" class="newTodoButton" onClick="newTodo"/>
 					</View>
 				</HeaderView>
 			</ListSection>

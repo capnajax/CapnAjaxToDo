@@ -14,7 +14,8 @@ exports.definition = {
         defaults: {
             completed: 0,
             image: null,
-            lastmoddt: "0"
+            content: "",
+            lastmoddt: new Date().toDateString()
         },
         adapter: {
             type: "sql",

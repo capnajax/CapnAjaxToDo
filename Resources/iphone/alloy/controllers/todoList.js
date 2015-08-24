@@ -33,6 +33,21 @@ function Controller() {
         Ti.API.debug("transform returns " + JSON.stringify(result));
         return result;
     }
+    function newTodo() {
+        var newModel = Alloy.createModel("todo");
+        Ti.API.debug("newModel1: " + JSON.stringify(newModel));
+        newModel.save();
+        Alloy.Collections.todo.fetch();
+        Ti.API.debug("newModel2: " + JSON.stringify(newModel));
+        openDetail(newModel.id);
+    }
+    function openDetail(id) {
+        var editItemScreen = Alloy.createController("todoItem", {
+            itemId: id
+        });
+        editItemScreen.getView().addEventListener("close", refreshData);
+        Alloy.Globals.navigation.advance(editItemScreen.getView());
+    }
     function refreshData() {
         todo.fetch();
         $.pendingTodos.setItems(transform(todo.pending()));
@@ -54,6 +69,7 @@ function Controller() {
     }
     var $ = this;
     var exports = {};
+    var __defers = {};
     $.__views.todoList = Ti.UI.createView({
         id: "todoList"
     });
@@ -147,6 +163,7 @@ function Controller() {
         id: "newTodo"
     });
     $.__views.pendingHeaderView.add($.__views.newTodo);
+    newTodo ? $.__views.newTodo.addEventListener("click", newTodo) : __defers["$.__views.newTodo!click!newTodo"] = true;
     $.__views.pendingTodos = Ti.UI.createListSection({
         defaultItemTemplate: "todoItem",
         headerView: $.__views.pendingHeaderView,
@@ -217,15 +234,12 @@ function Controller() {
                 setTimeout(refreshData, 500);
             } else {
                 Ti.API.debug("itemClick on id " + evt.itemId);
-                var editItemScreen = Alloy.createController("todoItem", {
-                    itemId: evt.itemId
-                });
-                editItemScreen.getView().addEventListener("close", refreshData);
-                Alloy.Globals.navigation.advance(editItemScreen.getView());
+                openDetail(evt.itemId);
             }
         });
         refreshData();
     }();
+    __defers["$.__views.newTodo!click!newTodo"] && $.__views.newTodo.addEventListener("click", newTodo);
     _.extend($, exports);
 }
 

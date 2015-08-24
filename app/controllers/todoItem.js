@@ -2,8 +2,6 @@ var args = arguments[0] || {},
 	fa = require('FontAwesome'),
 	itemId = args.itemId;
 	
-var contentChanged = false;
-
 function instanceViewFilter(collection) {
 	var result = collection.where({id:itemId});
 	Ti.API.debug("todo.result on itemId " +itemId+ " == " + JSON.stringify(result));
