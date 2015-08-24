@@ -174,7 +174,7 @@ function Controller() {
         } else retreat(1);
     };
     var openDrawer = function() {
-        if (false || Alloy.isHandheld) {
+        if (drawer && drawerContent) if (false || Alloy.isHandheld) {
             var animationDuration = duration * -drawer.rect.x / drawer.rect.width;
             drawer.visible = true;
             drawerOpen = true;

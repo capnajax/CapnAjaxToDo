@@ -1,28 +1,30 @@
 
 ".container" : {
-	backgroundColor:"white"
+	backgroundColor:"white",
+	height: Ti.UI.SIZE,
+	layout: "vertical"
 },
 "#statusContainer": {
 	top: 0,
 	left: 10,
 	right: 10,
-	height: 50
+	height: 50,
+	layout: "horizontal"
 }
-".statusIcon": {
-	top: 0,
-	left: 0,
-	width: 30,
-	height: 40
+".modelContainer": {
+	height: Ti.UI.SIZE,
+	layout: "vertical"
+}
+".todoStatus": {
+	width: 40
 },
-".statusIcon[platform=ios]": {
-	font: {
-		fontFamily:"FontAwesome"
-	}
+".todoStatusCheck": {
+	width: 24, 
+	height: 24
 },
 ".statusLabel": {
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT,
-	left: 30,
-	right: 0,
+	width: Titanium.UI.SIZE,
 	font: {
 		fontSize: 24,
 		fontFamily: "Helvetica,sans-serif"
@@ -33,12 +35,12 @@
 	top: 40,
 	left: 10,
 	right: 10,
-	bottom: 345
+	height: 150,
+	color: "black"
 }
 
 ".imageContainer": {
-	height: 300,
-	bottom: 25
+	height: 300
 }
 ".updateImage": {
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,

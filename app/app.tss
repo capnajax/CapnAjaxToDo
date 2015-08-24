@@ -1,0 +1,4 @@
+"#dummy": {
+	height: 0,
+	softKeyboardOnFocus: Titanium.UI.Android.SOFT_KEYBOARD_HIDE_ON_FOCUS
+}

@@ -1,12 +1,16 @@
 <Alloy>
 	<View class="container">
+		<TextField platform="android" id="dummy"/>
 		<!-- requires 4.1.1 due to defect in 4.1: https://jira.appcelerator.org/browse/TIMOB-19209 -->
 		<ListView id="todoListListView">
 		    <SearchBar id="search" showCancel="true" />
 			<Templates>
 				<ItemTemplate name="todoItem">
 					<View class="itemView">
-						<Label class="todoStatus" bindId="completed" />
+						<View class="todoStatus" bindId="status">
+							<ImageView class="todoStatusCheck" image="/checkbox_checked.png" bindId="completed"/>
+							<ImageView class="todoStatusCheck" image="/checkbox_unchecked.png" bindId="pending"/>
+						</View>
 						<ImageView class="todoImage" bindId="image" />
 						<Label class="todoContent" bindId="content" />
 					</View>

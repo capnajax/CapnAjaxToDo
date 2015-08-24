@@ -297,7 +297,9 @@ var retreat = function(index) {
 		$.navigation.scrollToView(_.first(_.last($.navigation.views, steps+1)));
 		setTimeout(function() {
 			for(var i = 0; i < steps; i++) {
-				$.navigation.removeView(_.last($.navigation.views));
+				var lastView = _.last($.navigation.views);
+				lastView.fireEvent('close', {source:lastView});
+				$.navigation.removeView(lastView);
 			}
 		}, 0);
 
@@ -361,25 +363,29 @@ var home = function(newHome) {
  */
 var openDrawer = function() {
 
-	if(!OS_IOS || Alloy.isHandheld) { // everything but iPad
-
-		// animate drawer openning -- both the drawer and the drawer pull, but the pull can lag slightly behind the drawer
+	if(drawer && drawerContent) {
 	
-		// the time for the animation, so that the drawer is moving at about the same speed no matter where the animation
-		// starts from
-		var animationDuration = duration * -drawer.rect.x / drawer.rect.width;
+		if(!OS_IOS || Alloy.isHandheld) { // everything but iPad
 	
-		drawer.visible = true;
-		drawerOpen = true;
+			// animate drawer openning -- both the drawer and the drawer pull, but the pull can lag slightly behind the drawer
 		
-		drawerContent && drawerContent.fireEvent("draweropen");
+			// the time for the animation, so that the drawer is moving at about the same speed no matter where the animation
+			// starts from
+			var animationDuration = duration * -drawer.rect.x / drawer.rect.width;
 		
-		drawer.animate({left: 0, duration: animationDuration});
-
-	} else { // iPad
-		
-		drawerOpen = true;
-		
+			drawer.visible = true;
+			drawerOpen = true;
+			
+			drawerContent && drawerContent.fireEvent("draweropen");
+			
+			drawer.animate({left: 0, duration: animationDuration});
+	
+		} else { // iPad
+			
+			drawerOpen = true;
+			
+		}
+	
 	}
 };
 

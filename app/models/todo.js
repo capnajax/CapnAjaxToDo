@@ -1,4 +1,3 @@
-var fa = require('FontAwesome');
 	
 exports.definition = {
 	config: {
@@ -25,8 +24,8 @@ exports.definition = {
 		_.extend(Model.prototype, {
 			// extended functions and properties go here
 
-			updated: function() {
-				this.save({lastmoddt:new Date().toString()}, {silent:true});
+			updated: function(options) {
+				this.save({lastmoddt:new Date().toString()}, _.extend(options||{},{silent:true}));
 			}
 
 		});
@@ -54,16 +53,16 @@ exports.definition = {
 				return this.where({completed: 1});
 			},
 			
-			toggle: function(id) {
+			toggle: function(id, options) {
 				var model = this.get(id);
 				model.save({completed: model.get("completed")?0:1});
-				model.updated();
+				model.updated(options);
 			},
 			
-			updateContent: function(id, content) {
+			updateContent: function(id, content, options) {
 				var model = this.get(id);
 				model.save({content: content}, {silent: true});
-				model.updated();
+				model.updated(options);
 			},
 			
 			comparator: function(t1, t2) {

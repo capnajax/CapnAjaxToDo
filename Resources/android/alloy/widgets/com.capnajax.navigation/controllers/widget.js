@@ -134,7 +134,13 @@ function Controller() {
         drawer && closeDrawer(true);
         $.navigation.scrollToView(_.first(_.last($.navigation.views, steps + 1)));
         setTimeout(function() {
-            for (var i = 0; steps > i; i++) $.navigation.removeView(_.last($.navigation.views));
+            for (var i = 0; steps > i; i++) {
+                var lastView = _.last($.navigation.views);
+                lastView.fireEvent("close", {
+                    source: lastView
+                });
+                $.navigation.removeView(lastView);
+            }
         }, 0);
         updateActionBar();
     };
@@ -146,14 +152,16 @@ function Controller() {
         } else home($.navigation.views[0]);
     };
     var openDrawer = function() {
-        var animationDuration = duration * -drawer.rect.x / drawer.rect.width;
-        drawer.visible = true;
-        drawerOpen = true;
-        drawerContent && drawerContent.fireEvent("draweropen");
-        drawer.animate({
-            left: 0,
-            duration: animationDuration
-        });
+        if (drawer && drawerContent) {
+            var animationDuration = duration * -drawer.rect.x / drawer.rect.width;
+            drawer.visible = true;
+            drawerOpen = true;
+            drawerContent && drawerContent.fireEvent("draweropen");
+            drawer.animate({
+                left: 0,
+                duration: animationDuration
+            });
+        }
     };
     var closeDrawer = function(now) {
         if (drawer && drawerContent && true) if (now) {

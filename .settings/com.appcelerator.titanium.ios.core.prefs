@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+iosLaunchConfigurationAttributes/ATTR_MINIFY=true
+iosLaunchConfigurationAttributes/ATTR_PROJECT_NAME=CapnAjaxToDo
+iosLaunchConfigurationAttributes/ATTR_UPLOAD_DEBUG_SYMBOLS=false
+iosLaunchConfigurationAttributes/appid=com.capnajax.todo
+iosLaunchConfigurationAttributes/certificate=Thomas Wilkinson (766A88NZWU)
+iosLaunchConfigurationAttributes/keychain=
+iosLaunchConfigurationAttributes/sdk_version=8.4
+iosLaunchConfigurationAttributes/uuid=77c8d6da-e9b0-4b23-91bf-22b7f5e4714c

@@ -23,8 +23,11 @@
 	left: 0,
 	width: 40,
 	bottom: 0,
-	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER
 },
+".todoStatusCheck": {
+	width:24, 
+	height: 24
+}
 ".todoContent": {
 	left: 40,
 	right: 20,

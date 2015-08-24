@@ -1,7 +1,5 @@
 var Alloy = require("alloy"), _ = require("alloy/underscore")._, model, collection;
 
-var fa = require("FontAwesome");
-
 exports.definition = {
     config: {
         columns: {
@@ -14,7 +12,8 @@ exports.definition = {
         defaults: {
             completed: 0,
             image: null,
-            lastmoddt: "0"
+            content: "",
+            lastmoddt: new Date().toDateString()
         },
         adapter: {
             type: "sql",
@@ -24,12 +23,12 @@ exports.definition = {
     },
     extendModel: function(Model) {
         _.extend(Model.prototype, {
-            updated: function() {
+            updated: function(options) {
                 this.save({
                     lastmoddt: new Date().toString()
-                }, {
+                }, _.extend(options || {}, {
                     silent: true
-                });
+                }));
             }
         });
         return Model;
@@ -46,21 +45,21 @@ exports.definition = {
                     completed: 1
                 });
             },
-            toggle: function(id) {
+            toggle: function(id, options) {
                 var model = this.get(id);
                 model.save({
                     completed: model.get("completed") ? 0 : 1
                 });
-                model.updated();
+                model.updated(options);
             },
-            updateContent: function(id, content) {
+            updateContent: function(id, content, options) {
                 var model = this.get(id);
                 model.save({
                     content: content
                 }, {
                     silent: true
                 });
-                model.updated();
+                model.updated(options);
             },
             comparator: function(t1, t2) {
                 var d1 = new Date(t1.get("lastmoddt")).getTime(), d2 = new Date(t2.get("lastmoddt")).getTime();

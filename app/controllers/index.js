@@ -12,7 +12,6 @@ function login(e) {
 
 	Alloy.Globals.navigation = nav;
 
-	$.index.close();
 }
 
 if (OS_ANDROID) {

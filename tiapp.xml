@@ -28,6 +28,10 @@
                 <false/>
                 <key>UIStatusBarStyle</key>
                 <string>UIStatusBarStyleDefault</string>
+                <key>UIAppFonts</key>
+                <array>
+                	<string>/fonts/FontAwesome.ttf</string>
+                </array>
             </dict>
         </plist>
     </ios>

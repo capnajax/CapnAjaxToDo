@@ -15,22 +15,37 @@ function Controller() {
                 template: "todoItem",
                 properties: {
                     itemId: model.id,
-                    height: 50
+                    height: 50,
+                    searchableText: model.content
+                },
+                pending: {
+                    opacity: model.completed ? 0 : 1
                 },
                 completed: {
-                    text: model.completed ? icons.completed : icons.pending,
-                    font: {
-                        fontFamily: fa.fontfamily,
-                        fontSize: 18
-                    }
+                    opacity: model.completed ? 1 : 0
                 },
                 content: {
                     text: model.content
                 }
             };
         });
-        Ti.API.debug("transform returns " + JSON.stringify(result));
         return result;
+    }
+    function newTodo() {
+        var newModel = Alloy.createModel("todo");
+        newModel.save();
+        Alloy.Collections.todo.fetch();
+        openDetail(newModel.id);
+    }
+    function openDetail(id) {
+        var editItemScreen = Alloy.createController("todoItem", {
+            itemId: id
+        });
+        editItemScreen.getView().addEventListener("close", function() {
+            Ti.API.debug("refreshing list");
+            refreshData();
+        });
+        Alloy.Globals.navigation.advance(editItemScreen.getView());
     }
     function refreshData() {
         todo.fetch();
@@ -53,30 +68,64 @@ function Controller() {
     }
     var $ = this;
     var exports = {};
+    var __defers = {};
     $.__views.todoList = Ti.UI.createView({
         id: "todoList"
     });
     $.__views.todoList && $.addTopLevelView($.__views.todoList);
-    var __alloyId28 = {};
-    var __alloyId31 = [];
-    var __alloyId33 = {
+    $.__views.dummy = Ti.UI.createTextField({
+        id: "dummy"
+    });
+    $.__views.todoList.add($.__views.dummy);
+    $.__views.search = Ti.UI.createSearchBar({
+        id: "search",
+        showCancel: "true"
+    });
+    var __alloyId32 = {};
+    var __alloyId35 = [];
+    var __alloyId37 = {
         type: "Ti.UI.View",
         childTemplates: function() {
-            var __alloyId34 = [];
-            var __alloyId36 = {
-                type: "Ti.UI.Label",
-                bindId: "completed",
+            var __alloyId38 = [];
+            var __alloyId40 = {
+                type: "Ti.UI.View",
+                bindId: "status",
+                childTemplates: function() {
+                    var __alloyId41 = [];
+                    var __alloyId43 = {
+                        type: "Ti.UI.ImageView",
+                        bindId: "completed",
+                        properties: {
+                            width: 24,
+                            height: 24,
+                            image: "/checkbox_checked.png",
+                            bindId: "completed"
+                        }
+                    };
+                    __alloyId41.push(__alloyId43);
+                    var __alloyId45 = {
+                        type: "Ti.UI.ImageView",
+                        bindId: "pending",
+                        properties: {
+                            width: 24,
+                            height: 24,
+                            image: "/checkbox_unchecked.png",
+                            bindId: "pending"
+                        }
+                    };
+                    __alloyId41.push(__alloyId45);
+                    return __alloyId41;
+                }(),
                 properties: {
                     top: 0,
                     left: 0,
                     width: 40,
                     bottom: 0,
-                    textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
-                    bindId: "completed"
+                    bindId: "status"
                 }
             };
-            __alloyId34.push(__alloyId36);
-            var __alloyId38 = {
+            __alloyId38.push(__alloyId40);
+            var __alloyId47 = {
                 type: "Ti.UI.ImageView",
                 bindId: "image",
                 properties: {
@@ -84,8 +133,8 @@ function Controller() {
                     bindId: "image"
                 }
             };
-            __alloyId34.push(__alloyId38);
-            var __alloyId40 = {
+            __alloyId38.push(__alloyId47);
+            var __alloyId49 = {
                 type: "Ti.UI.Label",
                 bindId: "content",
                 properties: {
@@ -97,8 +146,8 @@ function Controller() {
                     bindId: "content"
                 }
             };
-            __alloyId34.push(__alloyId40);
-            return __alloyId34;
+            __alloyId38.push(__alloyId49);
+            return __alloyId38;
         }(),
         properties: {
             top: 0,
@@ -107,14 +156,14 @@ function Controller() {
             bottom: 0
         }
     };
-    __alloyId31.push(__alloyId33);
-    var __alloyId30 = {
+    __alloyId35.push(__alloyId37);
+    var __alloyId34 = {
         properties: {
             name: "todoItem"
         },
-        childTemplates: __alloyId31
+        childTemplates: __alloyId35
     };
-    __alloyId28["todoItem"] = __alloyId30;
+    __alloyId32["todoItem"] = __alloyId34;
     $.__views.pendingHeaderView = Ti.UI.createView({
         width: "100%",
         height: 50,
@@ -142,13 +191,14 @@ function Controller() {
         id: "newTodo"
     });
     $.__views.pendingHeaderView.add($.__views.newTodo);
+    newTodo ? $.__views.newTodo.addEventListener("click", newTodo) : __defers["$.__views.newTodo!click!newTodo"] = true;
     $.__views.pendingTodos = Ti.UI.createListSection({
         defaultItemTemplate: "todoItem",
         headerView: $.__views.pendingHeaderView,
         id: "pendingTodos"
     });
-    var __alloyId42 = [];
-    __alloyId42.push($.__views.pendingTodos);
+    var __alloyId51 = [];
+    __alloyId51.push($.__views.pendingTodos);
     $.__views.completedHeaderView = Ti.UI.createView({
         width: "100%",
         height: 50,
@@ -173,53 +223,38 @@ function Controller() {
         headerView: $.__views.completedHeaderView,
         id: "completedTodos"
     });
-    __alloyId42.push($.__views.completedTodos);
+    __alloyId51.push($.__views.completedTodos);
     $.__views.todoListListView = Ti.UI.createListView({
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
         backgroundColor: "white",
-        sections: __alloyId42,
-        templates: __alloyId28,
+        sections: __alloyId51,
+        templates: __alloyId32,
+        searchView: $.__views.search,
         id: "todoListListView"
     });
     $.__views.todoList.add($.__views.todoListListView);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var todo = (arguments[0] || {}, Alloy.Collections.todo), fa = require("FontAwesome");
-    var icons = {
-        completed: String.fromCharCode(fa.charcode["fa-check-circle-o"]),
-        pending: String.fromCharCode(fa.charcode["fa-circle-o"]),
-        updating: String.fromCharCode(fa.charcode["fa-clock-o"])
-    };
-    var db = Ti.Database.open("_alloy_");
-    db.execute("INSERT INTO todo (completed, content) VALUES (0, 'test content');");
-    Ti.API.debug(db.execute("select * from todo").rowCount);
-    db.close();
-    var db = Ti.Database.open("_alloy_");
-    Ti.API.debug(db.execute("select * from todo").rowCount);
-    db.close();
+    var todo = (arguments[0] || {}, Alloy.Collections.todo);
     !function() {
         $.todoListListView.addEventListener("itemclick", function(evt) {
-            if ("completed" === evt.bindId) {
-                Ti.API.debug("toggleStatus on id=" + evt.itemId);
+            if (_.contains([ "completed", "pending", "status" ], evt.bindId)) {
                 var item = evt.section.getItemAt(evt.itemIndex);
-                item.completed.text = icons.updating;
+                item.completed.opacity = 1 - item.completed.opacity;
+                item.pending.opacity = 1 - item.pending.opacity;
                 evt.section.updateItemAt(evt.itemIndex, item);
-                todo.toggle(evt.itemId);
-                setTimeout(refreshData, 500);
-            } else {
-                Ti.API.debug("itemClick on id " + evt.itemId);
-                var editItemScreen = Alloy.createController("todoItem", {
-                    itemId: evt.itemId
+                todo.toggle(evt.itemId, {
+                    success: refreshData
                 });
-                editItemScreen.getView().addEventListener("close", refreshData);
-                Alloy.Globals.navigation.advance(editItemScreen.getView());
-            }
+                setTimeout(refreshData, 500);
+            } else openDetail(evt.itemId);
         });
         refreshData();
     }();
+    __defers["$.__views.newTodo!click!newTodo"] && $.__views.newTodo.addEventListener("click", newTodo);
     _.extend($, exports);
 }
 

@@ -17,7 +17,6 @@ function Controller() {
         nav.advance(firstController.getView());
         nav.getView().open();
         Alloy.Globals.navigation = nav;
-        $.index.close();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
