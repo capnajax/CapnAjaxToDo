@@ -10,9 +10,15 @@
 				<Label class="statusLabel" textid="{statusLabel}" />
 			</View>
 			<TextArea class="contentArea" value="{content}" onChange="updateContent" onBlur="refresh" />
-			<View class="imageContainer">
-				<ImageView class="image" src="{image}" />
-				<Label class="updateImage" textid="item_updateImage" />
+			<View class="imageContainer" onClick="updatePhoto" roleid="imageContainer">
+				<ImageView class="image" image="{image}" />
+				<Label class="updateImage" textid="item_updateImage" roleid="updateImageButton" />
+				<View class="imageOptionsContainer" roleid="imageOptionsContainer">
+					<Button class="imageOption cameraImage"  titleid="image_camera" onClick="updatePhotoCamera"/>
+					<Button class="imageOption galleryImage" titleid="image_gallery"onClick="updatePhotoGallery"/>
+					<Button class="imageOption deleteImage"  titleid="image_delete" onClick="updatePhotoDelete"/>
+					<Button class="imageOption cancelImage"  titleid="image_cancel" onClick="updatePhotoCancel"/>
+				</View>
 			</View>
 			<View class="lastModContainer">
 				<Label class="lastModLabel" textid="item_last_modified"/>

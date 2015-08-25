@@ -11,6 +11,10 @@ function Controller() {
     function transform(collection) {
         var result = _.map(collection, function(model) {
             model = model.toJSON();
+            var content = {
+                text: model.content
+            };
+            model.thumbnail || (content.right = 10);
             return {
                 template: "todoItem",
                 properties: {
@@ -24,9 +28,10 @@ function Controller() {
                 completed: {
                     opacity: model.completed ? 1 : 0
                 },
-                content: {
-                    text: model.content
-                }
+                image: {
+                    image: model.thumbnail
+                },
+                content: content
             };
         });
         return result;
@@ -42,7 +47,6 @@ function Controller() {
             itemId: id
         });
         editItemScreen.getView().addEventListener("close", function() {
-            Ti.API.debug("refreshing list");
             refreshData();
         });
         Alloy.Globals.navigation.advance(editItemScreen.getView());
@@ -81,18 +85,18 @@ function Controller() {
         id: "search",
         showCancel: "true"
     });
-    var __alloyId32 = {};
-    var __alloyId35 = [];
-    var __alloyId37 = {
+    var __alloyId42 = {};
+    var __alloyId45 = [];
+    var __alloyId47 = {
         type: "Ti.UI.View",
         childTemplates: function() {
-            var __alloyId38 = [];
-            var __alloyId40 = {
+            var __alloyId48 = [];
+            var __alloyId50 = {
                 type: "Ti.UI.View",
                 bindId: "status",
                 childTemplates: function() {
-                    var __alloyId41 = [];
-                    var __alloyId43 = {
+                    var __alloyId51 = [];
+                    var __alloyId53 = {
                         type: "Ti.UI.ImageView",
                         bindId: "completed",
                         properties: {
@@ -102,8 +106,8 @@ function Controller() {
                             bindId: "completed"
                         }
                     };
-                    __alloyId41.push(__alloyId43);
-                    var __alloyId45 = {
+                    __alloyId51.push(__alloyId53);
+                    var __alloyId55 = {
                         type: "Ti.UI.ImageView",
                         bindId: "pending",
                         properties: {
@@ -113,8 +117,8 @@ function Controller() {
                             bindId: "pending"
                         }
                     };
-                    __alloyId41.push(__alloyId45);
-                    return __alloyId41;
+                    __alloyId51.push(__alloyId55);
+                    return __alloyId51;
                 }(),
                 properties: {
                     top: 0,
@@ -124,30 +128,32 @@ function Controller() {
                     bindId: "status"
                 }
             };
-            __alloyId38.push(__alloyId40);
-            var __alloyId47 = {
-                type: "Ti.UI.ImageView",
-                bindId: "image",
-                properties: {
-                    right: 0,
-                    bindId: "image"
-                }
-            };
-            __alloyId38.push(__alloyId47);
-            var __alloyId49 = {
+            __alloyId48.push(__alloyId50);
+            var __alloyId57 = {
                 type: "Ti.UI.Label",
                 bindId: "content",
                 properties: {
                     left: 40,
-                    right: 20,
+                    right: 50,
                     ellipsize: Ti.UI.TEXT_ELLIPSIZE_TRUNCATE_END,
                     wordWrap: false,
                     color: "black",
                     bindId: "content"
                 }
             };
-            __alloyId38.push(__alloyId49);
-            return __alloyId38;
+            __alloyId48.push(__alloyId57);
+            var __alloyId59 = {
+                type: "Ti.UI.ImageView",
+                bindId: "image",
+                properties: {
+                    right: 10,
+                    height: 30,
+                    width: 30,
+                    bindId: "image"
+                }
+            };
+            __alloyId48.push(__alloyId59);
+            return __alloyId48;
         }(),
         properties: {
             top: 0,
@@ -156,14 +162,14 @@ function Controller() {
             bottom: 0
         }
     };
-    __alloyId35.push(__alloyId37);
-    var __alloyId34 = {
+    __alloyId45.push(__alloyId47);
+    var __alloyId44 = {
         properties: {
             name: "todoItem"
         },
-        childTemplates: __alloyId35
+        childTemplates: __alloyId45
     };
-    __alloyId32["todoItem"] = __alloyId34;
+    __alloyId42["todoItem"] = __alloyId44;
     $.__views.pendingHeaderView = Ti.UI.createView({
         width: "100%",
         height: 50,
@@ -197,8 +203,8 @@ function Controller() {
         headerView: $.__views.pendingHeaderView,
         id: "pendingTodos"
     });
-    var __alloyId51 = [];
-    __alloyId51.push($.__views.pendingTodos);
+    var __alloyId61 = [];
+    __alloyId61.push($.__views.pendingTodos);
     $.__views.completedHeaderView = Ti.UI.createView({
         width: "100%",
         height: 50,
@@ -223,15 +229,15 @@ function Controller() {
         headerView: $.__views.completedHeaderView,
         id: "completedTodos"
     });
-    __alloyId51.push($.__views.completedTodos);
+    __alloyId61.push($.__views.completedTodos);
     $.__views.todoListListView = Ti.UI.createListView({
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
         backgroundColor: "white",
-        sections: __alloyId51,
-        templates: __alloyId32,
+        sections: __alloyId61,
+        templates: __alloyId42,
         searchView: $.__views.search,
         id: "todoListListView"
     });

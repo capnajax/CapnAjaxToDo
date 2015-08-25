@@ -3,7 +3,11 @@ var args = arguments[0] || {},
 
 function transform(collection) {
 	var result = _.map(collection, function(model) {
+
 		model = model.toJSON();
+		var content = {text: model.content};
+		model.thumbnail || (content.right = 10);
+
 		return {
 			template: "todoItem",
 			properties: {
@@ -13,7 +17,8 @@ function transform(collection) {
 			},
 			pending:   {opacity: model.completed ? 0.0 : 1.0},
 			completed: {opacity: model.completed ? 1.0 : 0.0},
-			content: {text: model.content}
+			image: {image: model.thumbnail},
+			content: content
 		};
 	});
 	return result;

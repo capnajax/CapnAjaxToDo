@@ -46,7 +46,40 @@
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
 	color: "white",
 	bottom: 10
+},
+".imageOptionsContainer": {
+	bottom: 10,
+	height: 300,
+	width: 300,
+	visible: false
+},
+".imageOption": {
+	width: 120,
+	height: 120,
+	borderRadius: 60,
+	borderColor: "white",
+	color: "white",
+	backgroundColor: "#33000000"
+},
+".cameraImage": {
+	top: 20,
+	left: 20,
 }
+".galleryImage": {
+	top: 20,
+	right: 20
+}
+".deleteImage": {
+	bottom: 20,
+	right: 20,
+	borderColor: "red",
+	color: "white"
+}
+".cancelImage": {
+	bottom: 20,
+	left: 20
+}
+
 ".image": {
 	bottom: 10,
 	height: 300,

@@ -11,7 +11,7 @@ function Controller() {
     function updateUi(e) {
         if (e && e.fromAdapter) return;
         updateUi.opts || {};
-        var models = instanceViewFilter(__alloyId31);
+        var models = instanceViewFilter(__alloyId41);
         var len = models.length;
         var children = $.__views.todoItem.children;
         for (var d = children.length - 1; d >= 0; d--) $.__views.todoItem.remove(children[d]);
@@ -74,33 +74,96 @@ function Controller() {
             updateContent ? __alloyId18.addEventListener("change", updateContent) : __defers["__alloyId18!change!updateContent"] = true;
             refresh ? __alloyId18.addEventListener("blur", refresh) : __defers["__alloyId18!blur!refresh"] = true;
             var __alloyId20 = Ti.UI.createView({
-                height: 300
+                height: 300,
+                roleid: "imageContainer"
             });
             __alloyId7.add(__alloyId20);
+            updatePhoto ? __alloyId20.addEventListener("click", updatePhoto) : __defers["__alloyId20!click!updatePhoto"] = true;
             var __alloyId22 = Ti.UI.createImageView({
                 bottom: 10,
                 height: 300,
                 width: 300,
                 backgroundColor: "#159dbe",
-                src: "undefined" != typeof __alloyId5.__transform["image"] ? __alloyId5.__transform["image"] : __alloyId5.get("image")
+                image: "undefined" != typeof __alloyId5.__transform["image"] ? __alloyId5.__transform["image"] : __alloyId5.get("image")
             });
             __alloyId20.add(__alloyId22);
             var __alloyId24 = Ti.UI.createLabel({
                 textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
                 color: "white",
                 bottom: 10,
-                textid: "item_updateImage"
+                textid: "item_updateImage",
+                roleid: "updateImageButton"
             });
             __alloyId20.add(__alloyId24);
             var __alloyId26 = Ti.UI.createView({
+                bottom: 10,
+                height: 300,
+                width: 300,
+                visible: false,
+                roleid: "imageOptionsContainer"
+            });
+            __alloyId20.add(__alloyId26);
+            var __alloyId28 = Ti.UI.createButton({
+                width: 120,
+                height: 120,
+                borderRadius: 60,
+                borderColor: "white",
+                color: "white",
+                backgroundColor: "#33000000",
+                top: 20,
+                left: 20,
+                titleid: "image_camera"
+            });
+            __alloyId26.add(__alloyId28);
+            updatePhotoCamera ? __alloyId28.addEventListener("click", updatePhotoCamera) : __defers["__alloyId28!click!updatePhotoCamera"] = true;
+            var __alloyId30 = Ti.UI.createButton({
+                width: 120,
+                height: 120,
+                borderRadius: 60,
+                borderColor: "white",
+                color: "white",
+                backgroundColor: "#33000000",
+                top: 20,
+                right: 20,
+                titleid: "image_gallery"
+            });
+            __alloyId26.add(__alloyId30);
+            updatePhotoGallery ? __alloyId30.addEventListener("click", updatePhotoGallery) : __defers["__alloyId30!click!updatePhotoGallery"] = true;
+            var __alloyId32 = Ti.UI.createButton({
+                width: 120,
+                height: 120,
+                borderRadius: 60,
+                borderColor: "red",
+                color: "white",
+                backgroundColor: "#33000000",
+                bottom: 20,
+                right: 20,
+                titleid: "image_delete"
+            });
+            __alloyId26.add(__alloyId32);
+            updatePhotoDelete ? __alloyId32.addEventListener("click", updatePhotoDelete) : __defers["__alloyId32!click!updatePhotoDelete"] = true;
+            var __alloyId34 = Ti.UI.createButton({
+                width: 120,
+                height: 120,
+                borderRadius: 60,
+                borderColor: "white",
+                color: "white",
+                backgroundColor: "#33000000",
+                bottom: 20,
+                left: 20,
+                titleid: "image_cancel"
+            });
+            __alloyId26.add(__alloyId34);
+            updatePhotoCancel ? __alloyId34.addEventListener("click", updatePhotoCancel) : __defers["__alloyId34!click!updatePhotoCancel"] = true;
+            var __alloyId36 = Ti.UI.createView({
                 layout: "horizontal",
                 height: 15,
                 bottom: 10,
                 left: 10,
                 right: 10
             });
-            __alloyId7.add(__alloyId26);
-            var __alloyId28 = Ti.UI.createLabel({
+            __alloyId7.add(__alloyId36);
+            var __alloyId38 = Ti.UI.createLabel({
                 color: "#938d91",
                 width: Ti.UI.SIZE,
                 textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
@@ -110,8 +173,8 @@ function Controller() {
                 },
                 textid: "item_last_modified"
             });
-            __alloyId26.add(__alloyId28);
-            var __alloyId30 = Ti.UI.createLabel({
+            __alloyId36.add(__alloyId38);
+            var __alloyId40 = Ti.UI.createLabel({
                 color: "#938d91",
                 width: Ti.UI.SIZE,
                 font: {
@@ -119,7 +182,7 @@ function Controller() {
                 },
                 text: "undefined" != typeof __alloyId5.__transform["readabledate"] ? __alloyId5.__transform["readabledate"] : __alloyId5.get("readabledate")
             });
-            __alloyId26.add(__alloyId30);
+            __alloyId36.add(__alloyId40);
         }
     }
     function instanceViewFilter(collection) {
@@ -140,6 +203,64 @@ function Controller() {
     }
     function updateContent(evt) {
         Alloy.Collections.todo.updateContent(itemId, evt.value);
+    }
+    function findImageContainer(startingPoint) {
+        if ("imageContainer" === startingPoint.roleid) return startingPoint;
+        if (startingPoint.parent) return findImageContainer(startingPoint.parent);
+    }
+    function findImageOptionsContainer(parent) {
+        if (parent) return _.findWhere(parent.children, {
+            roleid: "imageOptionsContainer"
+        });
+    }
+    function findUpdateImageLabel(parent) {
+        if (parent) return _.findWhere(parent.children, {
+            roleid: "updateImageButton"
+        });
+    }
+    function updatePhoto(evt) {
+        Ti.API.debug(JSON.stringify(evt.source));
+        try {
+            var parent = findImageContainer(evt.source);
+            findImageOptionsContainer(parent).visible = true;
+            findUpdateImageLabel(parent).visible = false;
+        } catch (e) {
+            Ti.API.warn("todoItem::updatePhoto could not find an element or container, e == " + JSON.stringify(e));
+        }
+    }
+    function updatePhotoCancel(evt) {
+        try {
+            var parent = findImageContainer(evt.source);
+            findImageOptionsContainer(parent).visible = false;
+            findUpdateImageLabel(parent).visible = true;
+            evt.cancelBubble = true;
+        } catch (e) {
+            Ti.API.warn("todoItem::updatePhotoCancel could not find an element or container, e == " + JSON.stringify(e));
+        }
+    }
+    function updatePhotoCamera() {
+        Ti.Media.showCamera({
+            success: function(evt) {
+                evt.mediaType === Ti.Media.MEDIA_TYPE_PHOTO && Alloy.Collections.todo.updatePhoto(itemId, evt.media, {
+                    success: refresh
+                });
+            }
+        });
+    }
+    function updatePhotoGallery() {
+        Ti.Media.openPhotoGallery({
+            mediaTypes: Ti.Media.MEDIA_TYPE_PHOTO,
+            success: function(evt) {
+                evt.mediaType === Ti.Media.MEDIA_TYPE_PHOTO && Alloy.Collections.todo.updatePhoto(itemId, evt.media, {
+                    success: refresh
+                });
+            }
+        });
+    }
+    function updatePhotoDelete() {
+        Alloy.Collections.todo.updatePhoto(itemId, null, {
+            success: refresh
+        });
     }
     function refresh() {
         Alloy.Collections.todo.fetch({
@@ -172,11 +293,11 @@ function Controller() {
         dataTransform: "doTransform",
         id: "todoItem"
     });
-    var __alloyId31 = Alloy.Collections["todo"] || todo;
-    __alloyId31.on("fetch destroy change add remove reset", updateUi);
+    var __alloyId41 = Alloy.Collections["todo"] || todo;
+    __alloyId41.on("fetch destroy change add remove reset", updateUi);
     $.__views.todoItem && $.addTopLevelView($.__views.todoItem);
     exports.destroy = function() {
-        __alloyId31.off("fetch destroy change add remove reset", updateUi);
+        __alloyId41.off("fetch destroy change add remove reset", updateUi);
     };
     _.extend($, $.__views);
     var args = arguments[0] || {}, itemId = args.itemId;
@@ -184,6 +305,11 @@ function Controller() {
     __defers["__alloyId10!click!toggleStatus"] && __alloyId10.addEventListener("click", toggleStatus);
     __defers["__alloyId18!change!updateContent"] && __alloyId18.addEventListener("change", updateContent);
     __defers["__alloyId18!blur!refresh"] && __alloyId18.addEventListener("blur", refresh);
+    __defers["__alloyId20!click!updatePhoto"] && __alloyId20.addEventListener("click", updatePhoto);
+    __defers["__alloyId28!click!updatePhotoCamera"] && __alloyId28.addEventListener("click", updatePhotoCamera);
+    __defers["__alloyId30!click!updatePhotoGallery"] && __alloyId30.addEventListener("click", updatePhotoGallery);
+    __defers["__alloyId32!click!updatePhotoDelete"] && __alloyId32.addEventListener("click", updatePhotoDelete);
+    __defers["__alloyId34!click!updatePhotoCancel"] && __alloyId34.addEventListener("click", updatePhotoCancel);
     _.extend($, exports);
 }
 

@@ -11,8 +11,8 @@
 							<ImageView class="todoStatusCheck" image="/checkbox_checked.png" bindId="completed"/>
 							<ImageView class="todoStatusCheck" image="/checkbox_unchecked.png" bindId="pending"/>
 						</View>
-						<ImageView class="todoImage" bindId="image" />
 						<Label class="todoContent" bindId="content" />
+						<ImageView class="todoImage" bindId="image" />
 					</View>
 				</ItemTemplate>
 			</Templates>

@@ -7,6 +7,7 @@ exports.definition = {
             completed: "INTEGER",
             lastmoddt: "TEXT",
             image: "BLOB",
+            thumbnail: "BLOB",
             content: "TEXT"
         },
         defaults: {
@@ -56,6 +57,25 @@ exports.definition = {
                 var model = this.get(id);
                 model.save({
                     content: content
+                }, {
+                    silent: true
+                });
+                model.updated(options);
+            },
+            updatePhoto: function(id, image, options) {
+                var resizeHeight, resizeWidth, model = this.get(id), saveImage = null, thumbnail = null;
+                if (image) {
+                    resizeHeight = image.width > image.height ? 300 : 300 * image.height / image.width;
+                    resizeWidth = image.height > image.width ? 300 : 300 * image.width / image.height;
+                    saveImage = image && image.imageAsResized(resizeWidth, resizeHeight).imageAsCropped({
+                        width: 300,
+                        height: 300
+                    });
+                    thumbnail = saveImage && saveImage.imageAsThumbnail(30, 0, 0);
+                }
+                model.save({
+                    image: saveImage,
+                    thumbnail: thumbnail
                 }, {
                     silent: true
                 });
