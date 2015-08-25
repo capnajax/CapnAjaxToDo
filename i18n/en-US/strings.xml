@@ -7,6 +7,8 @@
 	<string name="item_last_modified">Last Modified:</string>
 	<string name="item_pending">Pending Item</string>
 	<string name="item_complete">Completed Item</string>
+	<string name="item_share">Share</string>
+	<string name="item_delete">Delete Item</string>
 	
 	<string name="image_camera">Camera</string>
 	<string name="image_gallery">Gallery</string>

@@ -53,6 +53,18 @@ exports.definition = {
                 });
                 model.updated(options);
             },
+            deleteItem: function(id, options) {
+                var model = this.get(id);
+                model.save({
+                    completed: -1
+                });
+                model.updated(options);
+                setTimeout(_.bind(function() {
+                    this.remove(model, {
+                        silent: true
+                    });
+                }, this), 5e3);
+            },
             updateContent: function(id, content, options) {
                 var model = this.get(id);
                 model.save({

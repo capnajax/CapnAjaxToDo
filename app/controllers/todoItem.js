@@ -7,6 +7,9 @@ function instanceViewFilter(collection) {
 }
 
 function doTransform(model) {
+	if(!model) {
+		return {};
+	}
 	var result = model.toJSON();
 	result.readabledate = new Date(result.lastmoddt).toLocaleString();
 	result.statusLabel = result.completed ? 'item_complete' : 'item_pending';
@@ -90,8 +93,36 @@ function updatePhotoDelete() {
 	Alloy.Collections.todo.updatePhoto(itemId, null, {success:refresh});
 }
 
+function deleteItem() {
+	Alloy.Collections.todo.deleteItem(itemId);
+	Alloy.Globals.navigation.retreat();
+}
+
+function share() {
+
+	// Not all shares can work with blobs. Save the image to a temp file before sharing.
+	
+	var todoItem = Alloy.Collections.todo.get(itemId),
+		dir = OS_ANDROID ? Ti.Filesystem.externalStorageDirectory : Ti.Filesystem.applicationDataDirectory;
+		tempFile = Ti.Filesystem.getFile(dir,"todo.jpg"),
+		content = todoItem.get("content"),
+		shareOpts = {
+//				text					: content,
+			    status                  : content,
+			    image                   : todoItem.get("image") ? tempFile.nativePath : null,
+			    androidDialogTitle      : L("item_share")
+			};
+		
+	tempFile.write(todoItem.get("image"));
+	tempFile = null;
+	
+	Ti.API.debug("shareOpts == " + JSON.stringify(shareOpts));
+	_.defer(function() {
+		require('com.alcoapps.socialshare').share(shareOpts);
+	});
+}
+
 function refresh() {
 	Alloy.Collections.todo.fetch({success:updateUi});
 }
 refresh();
-

@@ -2,6 +2,7 @@
 	<Collection src="todo"/>
 	<ScrollView class="container" dataCollection="todo" dataFunction="updateUi" dataFilter="instanceViewFilter" dataTransform="doTransform">
 		<View class="modelContainer">
+			<Button class="share" onClick="share" titleid="item_share"/>
 			<View id="statusContainer">
 				<View class="todoStatus" bindId="status" onClick="toggleStatus">
 					<ImageView class="todoStatusCheck" image="/checkbox_checked.png" opacity="{completedOpacity}"/>
@@ -24,6 +25,7 @@
 				<Label class="lastModLabel" textid="item_last_modified"/>
 				<Label class="lastModDt" text="{readabledate}" />
 			</View>
+			<Button class="delete" titleid="item_delete" onClick="deleteItem" />
 		</View>
 	</ScrollView>
 </Alloy>

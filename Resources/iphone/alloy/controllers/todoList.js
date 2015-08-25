@@ -81,18 +81,18 @@ function Controller() {
         id: "search",
         showCancel: "true"
     });
-    var __alloyId39 = {};
-    var __alloyId42 = [];
-    var __alloyId44 = {
+    var __alloyId43 = {};
+    var __alloyId46 = [];
+    var __alloyId48 = {
         type: "Ti.UI.View",
         childTemplates: function() {
-            var __alloyId45 = [];
-            var __alloyId47 = {
+            var __alloyId49 = [];
+            var __alloyId51 = {
                 type: "Ti.UI.View",
                 bindId: "status",
                 childTemplates: function() {
-                    var __alloyId48 = [];
-                    var __alloyId50 = {
+                    var __alloyId52 = [];
+                    var __alloyId54 = {
                         type: "Ti.UI.ImageView",
                         bindId: "completed",
                         properties: {
@@ -102,8 +102,8 @@ function Controller() {
                             bindId: "completed"
                         }
                     };
-                    __alloyId48.push(__alloyId50);
-                    var __alloyId52 = {
+                    __alloyId52.push(__alloyId54);
+                    var __alloyId56 = {
                         type: "Ti.UI.ImageView",
                         bindId: "pending",
                         properties: {
@@ -113,8 +113,8 @@ function Controller() {
                             bindId: "pending"
                         }
                     };
-                    __alloyId48.push(__alloyId52);
-                    return __alloyId48;
+                    __alloyId52.push(__alloyId56);
+                    return __alloyId52;
                 }(),
                 properties: {
                     top: 0,
@@ -124,8 +124,8 @@ function Controller() {
                     bindId: "status"
                 }
             };
-            __alloyId45.push(__alloyId47);
-            var __alloyId54 = {
+            __alloyId49.push(__alloyId51);
+            var __alloyId58 = {
                 type: "Ti.UI.Label",
                 bindId: "content",
                 properties: {
@@ -137,8 +137,8 @@ function Controller() {
                     bindId: "content"
                 }
             };
-            __alloyId45.push(__alloyId54);
-            var __alloyId56 = {
+            __alloyId49.push(__alloyId58);
+            var __alloyId60 = {
                 type: "Ti.UI.ImageView",
                 bindId: "image",
                 properties: {
@@ -148,8 +148,8 @@ function Controller() {
                     bindId: "image"
                 }
             };
-            __alloyId45.push(__alloyId56);
-            return __alloyId45;
+            __alloyId49.push(__alloyId60);
+            return __alloyId49;
         }(),
         properties: {
             top: 0,
@@ -158,14 +158,14 @@ function Controller() {
             bottom: 0
         }
     };
-    __alloyId42.push(__alloyId44);
-    var __alloyId41 = {
+    __alloyId46.push(__alloyId48);
+    var __alloyId45 = {
         properties: {
             name: "todoItem"
         },
-        childTemplates: __alloyId42
+        childTemplates: __alloyId46
     };
-    __alloyId39["todoItem"] = __alloyId41;
+    __alloyId43["todoItem"] = __alloyId45;
     $.__views.pendingHeaderView = Ti.UI.createView({
         width: "100%",
         height: 50,
@@ -199,8 +199,8 @@ function Controller() {
         headerView: $.__views.pendingHeaderView,
         id: "pendingTodos"
     });
-    var __alloyId58 = [];
-    __alloyId58.push($.__views.pendingTodos);
+    var __alloyId62 = [];
+    __alloyId62.push($.__views.pendingTodos);
     $.__views.completedHeaderView = Ti.UI.createView({
         width: "100%",
         height: 50,
@@ -225,15 +225,15 @@ function Controller() {
         headerView: $.__views.completedHeaderView,
         id: "completedTodos"
     });
-    __alloyId58.push($.__views.completedTodos);
+    __alloyId62.push($.__views.completedTodos);
     $.__views.todoListListView = Ti.UI.createListView({
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
         backgroundColor: "white",
-        sections: __alloyId58,
-        templates: __alloyId39,
+        sections: __alloyId62,
+        templates: __alloyId43,
         searchView: $.__views.search,
         id: "todoListListView"
     });

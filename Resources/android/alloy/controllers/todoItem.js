@@ -11,7 +11,7 @@ function Controller() {
     function updateUi(e) {
         if (e && e.fromAdapter) return;
         updateUi.opts || {};
-        var models = instanceViewFilter(__alloyId41);
+        var models = instanceViewFilter(__alloyId45);
         var len = models.length;
         var children = $.__views.todoItem.children;
         for (var d = children.length - 1; d >= 0; d--) $.__views.todoItem.remove(children[d]);
@@ -23,35 +23,44 @@ function Controller() {
                 layout: "vertical"
             });
             $.__views.todoItem.add(__alloyId7);
-            var __alloyId8 = Ti.UI.createView({
+            var __alloyId9 = Ti.UI.createButton({
+                right: 10,
+                top: 10,
+                width: Titanium.UI.SIZE,
+                textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
+                titleid: "item_share"
+            });
+            __alloyId7.add(__alloyId9);
+            share ? __alloyId9.addEventListener("click", share) : __defers["__alloyId9!click!share"] = true;
+            var __alloyId10 = Ti.UI.createView({
                 top: 0,
                 left: 10,
                 right: 10,
                 height: 50,
                 layout: "horizontal"
             });
-            __alloyId7.add(__alloyId8);
-            var __alloyId10 = Ti.UI.createView({
+            __alloyId7.add(__alloyId10);
+            var __alloyId12 = Ti.UI.createView({
                 width: 40,
                 bindId: "status"
             });
-            __alloyId8.add(__alloyId10);
-            toggleStatus ? __alloyId10.addEventListener("click", toggleStatus) : __defers["__alloyId10!click!toggleStatus"] = true;
-            var __alloyId12 = Ti.UI.createImageView({
+            __alloyId10.add(__alloyId12);
+            toggleStatus ? __alloyId12.addEventListener("click", toggleStatus) : __defers["__alloyId12!click!toggleStatus"] = true;
+            var __alloyId14 = Ti.UI.createImageView({
                 width: 24,
                 height: 24,
                 image: "/checkbox_checked.png",
                 opacity: "undefined" != typeof __alloyId5.__transform["completedOpacity"] ? __alloyId5.__transform["completedOpacity"] : __alloyId5.get("completedOpacity")
             });
-            __alloyId10.add(__alloyId12);
-            var __alloyId14 = Ti.UI.createImageView({
+            __alloyId12.add(__alloyId14);
+            var __alloyId16 = Ti.UI.createImageView({
                 width: 24,
                 height: 24,
                 image: "/checkbox_unchecked.png",
                 opacity: "undefined" != typeof __alloyId5.__transform["pendingOpacity"] ? __alloyId5.__transform["pendingOpacity"] : __alloyId5.get("pendingOpacity")
             });
-            __alloyId10.add(__alloyId14);
-            var __alloyId16 = Ti.UI.createLabel({
+            __alloyId12.add(__alloyId16);
+            var __alloyId18 = Ti.UI.createLabel({
                 textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT,
                 width: Titanium.UI.SIZE,
                 font: {
@@ -61,8 +70,8 @@ function Controller() {
                 color: "#193380",
                 textid: "undefined" != typeof __alloyId5.__transform["statusLabel"] ? __alloyId5.__transform["statusLabel"] : __alloyId5.get("statusLabel")
             });
-            __alloyId8.add(__alloyId16);
-            var __alloyId18 = Ti.UI.createTextArea({
+            __alloyId10.add(__alloyId18);
+            var __alloyId20 = Ti.UI.createTextArea({
                 top: 40,
                 left: 10,
                 right: 10,
@@ -70,40 +79,40 @@ function Controller() {
                 color: "black",
                 value: "undefined" != typeof __alloyId5.__transform["content"] ? __alloyId5.__transform["content"] : __alloyId5.get("content")
             });
-            __alloyId7.add(__alloyId18);
-            updateContent ? __alloyId18.addEventListener("change", updateContent) : __defers["__alloyId18!change!updateContent"] = true;
-            refresh ? __alloyId18.addEventListener("blur", refresh) : __defers["__alloyId18!blur!refresh"] = true;
-            var __alloyId20 = Ti.UI.createView({
+            __alloyId7.add(__alloyId20);
+            updateContent ? __alloyId20.addEventListener("change", updateContent) : __defers["__alloyId20!change!updateContent"] = true;
+            refresh ? __alloyId20.addEventListener("blur", refresh) : __defers["__alloyId20!blur!refresh"] = true;
+            var __alloyId22 = Ti.UI.createView({
                 height: 300,
                 roleid: "imageContainer"
             });
-            __alloyId7.add(__alloyId20);
-            updatePhoto ? __alloyId20.addEventListener("click", updatePhoto) : __defers["__alloyId20!click!updatePhoto"] = true;
-            var __alloyId22 = Ti.UI.createImageView({
+            __alloyId7.add(__alloyId22);
+            updatePhoto ? __alloyId22.addEventListener("click", updatePhoto) : __defers["__alloyId22!click!updatePhoto"] = true;
+            var __alloyId24 = Ti.UI.createImageView({
                 bottom: 10,
                 height: 300,
                 width: 300,
                 backgroundColor: "#159dbe",
                 image: "undefined" != typeof __alloyId5.__transform["image"] ? __alloyId5.__transform["image"] : __alloyId5.get("image")
             });
-            __alloyId20.add(__alloyId22);
-            var __alloyId24 = Ti.UI.createLabel({
+            __alloyId22.add(__alloyId24);
+            var __alloyId26 = Ti.UI.createLabel({
                 textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
                 color: "white",
                 bottom: 10,
                 textid: "item_updateImage",
                 roleid: "updateImageButton"
             });
-            __alloyId20.add(__alloyId24);
-            var __alloyId26 = Ti.UI.createView({
+            __alloyId22.add(__alloyId26);
+            var __alloyId28 = Ti.UI.createView({
                 bottom: 10,
                 height: 300,
                 width: 300,
                 visible: false,
                 roleid: "imageOptionsContainer"
             });
-            __alloyId20.add(__alloyId26);
-            var __alloyId28 = Ti.UI.createButton({
+            __alloyId22.add(__alloyId28);
+            var __alloyId30 = Ti.UI.createButton({
                 width: 120,
                 height: 120,
                 borderRadius: 60,
@@ -114,9 +123,9 @@ function Controller() {
                 left: 20,
                 titleid: "image_camera"
             });
-            __alloyId26.add(__alloyId28);
-            updatePhotoCamera ? __alloyId28.addEventListener("click", updatePhotoCamera) : __defers["__alloyId28!click!updatePhotoCamera"] = true;
-            var __alloyId30 = Ti.UI.createButton({
+            __alloyId28.add(__alloyId30);
+            updatePhotoCamera ? __alloyId30.addEventListener("click", updatePhotoCamera) : __defers["__alloyId30!click!updatePhotoCamera"] = true;
+            var __alloyId32 = Ti.UI.createButton({
                 width: 120,
                 height: 120,
                 borderRadius: 60,
@@ -127,9 +136,9 @@ function Controller() {
                 right: 20,
                 titleid: "image_gallery"
             });
-            __alloyId26.add(__alloyId30);
-            updatePhotoGallery ? __alloyId30.addEventListener("click", updatePhotoGallery) : __defers["__alloyId30!click!updatePhotoGallery"] = true;
-            var __alloyId32 = Ti.UI.createButton({
+            __alloyId28.add(__alloyId32);
+            updatePhotoGallery ? __alloyId32.addEventListener("click", updatePhotoGallery) : __defers["__alloyId32!click!updatePhotoGallery"] = true;
+            var __alloyId34 = Ti.UI.createButton({
                 width: 120,
                 height: 120,
                 borderRadius: 60,
@@ -140,9 +149,9 @@ function Controller() {
                 right: 20,
                 titleid: "image_delete"
             });
-            __alloyId26.add(__alloyId32);
-            updatePhotoDelete ? __alloyId32.addEventListener("click", updatePhotoDelete) : __defers["__alloyId32!click!updatePhotoDelete"] = true;
-            var __alloyId34 = Ti.UI.createButton({
+            __alloyId28.add(__alloyId34);
+            updatePhotoDelete ? __alloyId34.addEventListener("click", updatePhotoDelete) : __defers["__alloyId34!click!updatePhotoDelete"] = true;
+            var __alloyId36 = Ti.UI.createButton({
                 width: 120,
                 height: 120,
                 borderRadius: 60,
@@ -153,17 +162,17 @@ function Controller() {
                 left: 20,
                 titleid: "image_cancel"
             });
-            __alloyId26.add(__alloyId34);
-            updatePhotoCancel ? __alloyId34.addEventListener("click", updatePhotoCancel) : __defers["__alloyId34!click!updatePhotoCancel"] = true;
-            var __alloyId36 = Ti.UI.createView({
+            __alloyId28.add(__alloyId36);
+            updatePhotoCancel ? __alloyId36.addEventListener("click", updatePhotoCancel) : __defers["__alloyId36!click!updatePhotoCancel"] = true;
+            var __alloyId38 = Ti.UI.createView({
                 layout: "horizontal",
                 height: 15,
                 bottom: 10,
                 left: 10,
                 right: 10
             });
-            __alloyId7.add(__alloyId36);
-            var __alloyId38 = Ti.UI.createLabel({
+            __alloyId7.add(__alloyId38);
+            var __alloyId40 = Ti.UI.createLabel({
                 color: "#938d91",
                 width: Ti.UI.SIZE,
                 textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
@@ -173,8 +182,8 @@ function Controller() {
                 },
                 textid: "item_last_modified"
             });
-            __alloyId36.add(__alloyId38);
-            var __alloyId40 = Ti.UI.createLabel({
+            __alloyId38.add(__alloyId40);
+            var __alloyId42 = Ti.UI.createLabel({
                 color: "#938d91",
                 width: Ti.UI.SIZE,
                 font: {
@@ -182,7 +191,12 @@ function Controller() {
                 },
                 text: "undefined" != typeof __alloyId5.__transform["readabledate"] ? __alloyId5.__transform["readabledate"] : __alloyId5.get("readabledate")
             });
-            __alloyId36.add(__alloyId40);
+            __alloyId38.add(__alloyId42);
+            var __alloyId44 = Ti.UI.createButton({
+                titleid: "item_delete"
+            });
+            __alloyId7.add(__alloyId44);
+            deleteItem ? __alloyId44.addEventListener("click", deleteItem) : __defers["__alloyId44!click!deleteItem"] = true;
         }
     }
     function instanceViewFilter(collection) {
@@ -190,6 +204,7 @@ function Controller() {
         return result;
     }
     function doTransform(model) {
+        if (!model) return {};
         var result = model.toJSON();
         result.readabledate = new Date(result.lastmoddt).toLocaleString();
         result.statusLabel = result.completed ? "item_complete" : "item_pending";
@@ -262,6 +277,25 @@ function Controller() {
             success: refresh
         });
     }
+    function deleteItem() {
+        Alloy.Collections.todo.deleteItem(itemId);
+        Alloy.Globals.navigation.retreat();
+    }
+    function share() {
+        var todoItem = Alloy.Collections.todo.get(itemId), dir = Ti.Filesystem.externalStorageDirectory;
+        tempFile = Ti.Filesystem.getFile(dir, "todo.jpg"), content = todoItem.get("content"), 
+        shareOpts = {
+            status: content,
+            image: todoItem.get("image") ? tempFile.nativePath : null,
+            androidDialogTitle: L("item_share")
+        };
+        tempFile.write(todoItem.get("image"));
+        tempFile = null;
+        Ti.API.debug("shareOpts == " + JSON.stringify(shareOpts));
+        _.defer(function() {
+            require("com.alcoapps.socialshare").share(shareOpts);
+        });
+    }
     function refresh() {
         Alloy.Collections.todo.fetch({
             success: updateUi
@@ -293,23 +327,25 @@ function Controller() {
         dataTransform: "doTransform",
         id: "todoItem"
     });
-    var __alloyId41 = Alloy.Collections["todo"] || todo;
-    __alloyId41.on("fetch destroy change add remove reset", updateUi);
+    var __alloyId45 = Alloy.Collections["todo"] || todo;
+    __alloyId45.on("fetch destroy change add remove reset", updateUi);
     $.__views.todoItem && $.addTopLevelView($.__views.todoItem);
     exports.destroy = function() {
-        __alloyId41.off("fetch destroy change add remove reset", updateUi);
+        __alloyId45.off("fetch destroy change add remove reset", updateUi);
     };
     _.extend($, $.__views);
     var args = arguments[0] || {}, itemId = args.itemId;
     refresh();
-    __defers["__alloyId10!click!toggleStatus"] && __alloyId10.addEventListener("click", toggleStatus);
-    __defers["__alloyId18!change!updateContent"] && __alloyId18.addEventListener("change", updateContent);
-    __defers["__alloyId18!blur!refresh"] && __alloyId18.addEventListener("blur", refresh);
-    __defers["__alloyId20!click!updatePhoto"] && __alloyId20.addEventListener("click", updatePhoto);
-    __defers["__alloyId28!click!updatePhotoCamera"] && __alloyId28.addEventListener("click", updatePhotoCamera);
-    __defers["__alloyId30!click!updatePhotoGallery"] && __alloyId30.addEventListener("click", updatePhotoGallery);
-    __defers["__alloyId32!click!updatePhotoDelete"] && __alloyId32.addEventListener("click", updatePhotoDelete);
-    __defers["__alloyId34!click!updatePhotoCancel"] && __alloyId34.addEventListener("click", updatePhotoCancel);
+    __defers["__alloyId9!click!share"] && __alloyId9.addEventListener("click", share);
+    __defers["__alloyId12!click!toggleStatus"] && __alloyId12.addEventListener("click", toggleStatus);
+    __defers["__alloyId20!change!updateContent"] && __alloyId20.addEventListener("change", updateContent);
+    __defers["__alloyId20!blur!refresh"] && __alloyId20.addEventListener("blur", refresh);
+    __defers["__alloyId22!click!updatePhoto"] && __alloyId22.addEventListener("click", updatePhoto);
+    __defers["__alloyId30!click!updatePhotoCamera"] && __alloyId30.addEventListener("click", updatePhotoCamera);
+    __defers["__alloyId32!click!updatePhotoGallery"] && __alloyId32.addEventListener("click", updatePhotoGallery);
+    __defers["__alloyId34!click!updatePhotoDelete"] && __alloyId34.addEventListener("click", updatePhotoDelete);
+    __defers["__alloyId36!click!updatePhotoCancel"] && __alloyId36.addEventListener("click", updatePhotoCancel);
+    __defers["__alloyId44!click!deleteItem"] && __alloyId44.addEventListener("click", deleteItem);
     _.extend($, exports);
 }
 

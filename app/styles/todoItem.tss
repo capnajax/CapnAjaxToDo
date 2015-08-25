@@ -22,6 +22,12 @@
 	width: 24, 
 	height: 24
 },
+".share": {
+	right: 10,
+	top: 10,
+	width: Titanium.UI.SIZE,
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT
+},
 ".statusLabel": {
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT,
 	width: Titanium.UI.SIZE,
@@ -64,35 +70,35 @@
 ".cameraImage": {
 	top: 20,
 	left: 20,
-}
+},
 ".galleryImage": {
 	top: 20,
 	right: 20
-}
+},
 ".deleteImage": {
 	bottom: 20,
 	right: 20,
 	borderColor: "red",
 	color: "white"
-}
+},
 ".cancelImage": {
 	bottom: 20,
 	left: 20
-}
+},
 
 ".image": {
 	bottom: 10,
 	height: 300,
 	width: 300,
 	backgroundColor: "#159dbe"
-}
+},
 ".lastModContainer": {
 	layout: "horizontal",
 	height: 15,
 	bottom: 10,
 	left: 10,
 	right: 10
-}
+},
 ".lastModLabel": {
 	color: "#938d91",
 	width: Ti.UI.SIZE,
@@ -101,7 +107,7 @@
 	font: {
 		fontSize: 10
 	}
-}
+},
 
 ".lastModDt": {
 	color: "#938d91",
@@ -109,4 +115,8 @@
 	font: {
 		fontSize: 10
 	}
+},
+
+".delete[platform=ios]": {
+	color:"red"
 }
